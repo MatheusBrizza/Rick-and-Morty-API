@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>rico e morto API</title>
+</head>
+
+<body>
+    <div id="titulo">
+        <h1>The Rick and Morty API</h1>
+    </div>
+
+    <div id="card_busca">
+        <input id="id_personagem" type="number">
+        <button onclick="buscarPersonagem()">Pesquisar</button>
+    </div>
+
+
+    <div id="card_personagem">
+        <img width="200px" id="imagem_personagem" src="" alt="">
+    </div>
+
+    <div id="dados_personagem">
+        <ul>
+            <li id="nome"></li>
+            <li id="status"></li>
+            <li id="species"></li>
+            <li id="type"></li>
+        </ul>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    function buscarPersonagem() {
+        const idPersonagem = document.getElementById("id_personagem").value
+        $.ajax({
+            url: "https://rickandmortyapi.com/api/character/" + idPersonagem,
+            type: "get",
+            success: function (result) {
+                console.log(result)
+
+                document.getElementById("imagem_personagem").src = result.image
+                document.getElementById("nome").innerHTML = result.name
+                document.getElementById("status").innerHTML = result.status
+                document.getElementById("species").innerHTML = result.species
+                document.getElementById("type").innerHTML = result.type
+            }
+        });
+    }
+</script>
+
+<style>
+    body {
+        background-color: rgb(109, 255, 255);
+    }
+
+    h1 {
+        font-size: 65px;
+        text-align: center;
+    }
+
+    #card_busca {
+
+        text-align: center;
+    }
+
+    #card_personagem {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    #dados_personagem {
+        text-align: center;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 25px;
+
+    }
+</style>
